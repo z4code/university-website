@@ -1,0 +1,30 @@
+{% extends 'base.htm' %}
+
+{% block title %}Home{% endblock %}
+{% load mark %}
+
+{% block content %}
+	<!-- Release of the last 3 news. -->
+	{% if news %}
+		<h1>Latest News</h1>
+		<!-- Create cards. -->
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+			{% for new in news %}
+				<div class="col">
+			        <div class="card h-100">
+			            <img src="{{ new.image.url }}" class="card-img-top" alt="{{ new.location }}">
+			            <div class="card-body">
+			                <h5 class="card-title">{{ new.title }}</h5>
+			                <h6 class="card-subtitle mb-2 text-body-secondary">{{ new.location }} - {{ new.created_at|date:"M d, Y" }}</h6>
+			                <p class="card-text">{{ new.content|truncatewords:20|markdownify|safe }}</p>
+			            </div>
+			            <div class="card-footer d-flex align-items-center justify-content-between">
+			                <small class="text-body-secondary">{{ new.category }}</small>
+			                <a href="{% url 'new' new.pk %}" class="btn btn-sm btn-primary">View</a>
+			            </div>
+			        </div>
+			    </div>
+			{% endfor %}
+		</div>
+	{% endif %}
+{% endblock %}

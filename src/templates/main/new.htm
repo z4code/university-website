@@ -1,0 +1,25 @@
+{% extends 'base.htm' %}
+
+{% block title %}New{% endblock %}
+{% load mark %}
+
+{% block content %}
+	<!-- News details. -->
+	{% if new %}
+		<h6 class="card-subtitle mb-2 text-body-secondary">{{ new.location }} - {{ new.created_at|date:"M d, Y" }}</h6>
+		<h1>{{ new.title }}</h1>
+		<div class="row">
+			<div class="col-md-4">
+				<img src="{{ new.image.url }}" class="rounded img-fluid" alt="{{ new.location }}">
+			</div>
+			<div class="col-md-8">
+				{{ new.content|markdownify|safe }}
+				<div class="bg-light p-3 rounded">
+					{% for tag in new.tags.all %}
+						<a class="btn btn-sm btn-success" href="">{{ tag.name }}</a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
