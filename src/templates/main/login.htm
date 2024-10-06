@@ -1,0 +1,25 @@
+<!-- login.htm -->
+
+{% extends 'base.htm' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+	<form method="post" class="col-md-6 offset-md-3 p-5 d-grid">
+		{% csrf_token %}
+		<h1 class="display-5 text-center mb-5">Login</h1>
+		<!-- Username. -->
+		<div class="mb-3">
+			<input type="text" name="username" id="username" class="form-control" placeholder="Username">
+		</div>
+		<!-- Password. -->
+		<div class="mb-3">
+			<input type="password" name="password" id="password" class="form-control" placeholder="Password">
+		</div>
+		<button type="submit" class="btn btn-primary">Login</button>
+		<p class="text-center mt-3">
+			Don't have account?
+			<a href="{% url 'register' %}">Register</a>
+		</p>
+	</form>
+{% endblock %}

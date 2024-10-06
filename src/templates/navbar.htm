@@ -6,7 +6,15 @@
         </button>
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="menu" aria-labelledby="label">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="label">MENU</h5>
+                {% if user.is_authenticated %}
+                    {% if user.first_name and user.last_name %}
+                        <h5 class="offcanvas-title" id="label">{{ user.first_name }} {{ user.last_name }}</h5>
+                    {% else %}
+                        <h5 class="offcanvas-title" id="label">{{ user.username|upper }}</h5>
+                    {% endif %}
+                {% else %}
+                    <h5 class="offcanvas-title" id="label">MENU</h5>
+                {% endif %}
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
@@ -17,11 +25,23 @@
                 </form>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">

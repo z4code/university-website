@@ -1,0 +1,16 @@
+{% extends 'base.htm' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+	<form method="post" class="col-md-6 offset-md-3 p-5 d-grid">
+		{% csrf_token %}
+		<h1 class="display-5 text-center mb-5">Register</h1>
+		{{ form.as_div }}
+        <button type="submit" class="btn btn-primary">Register</button>
+		<p class="text-center mt-3">
+			Already have an account?
+			<a href="{% url 'login' %}">Login</a>
+		</p>
+	</form>
+{% endblock %}
