@@ -1,0 +1,27 @@
+{% extends 'base.htm' %}
+{% block title %}All Events{% endblock %}
+{% load mark %}
+{% block content %}
+    {% if events %}
+        <h1>Latest Events</h1>
+        <p>Concerts, lectures, sports events, and more</p>
+        <!-- Create cards. -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for event in events %}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ event.location }} - {{ event.created_at|date:"M d, Y" }}</h6>
+                            <p class="card-text">{{ event.description|markdownify|safe }}</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <small class="text-body-secondary">{{ event.event_type }}</small>
+                            <a href="{% url 'event' event.pk %}" class="btn btn-sm btn-primary">View</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

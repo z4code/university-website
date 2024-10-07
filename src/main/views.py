@@ -65,9 +65,15 @@ def register_user(request):
 
 # Event.
 def event(request, pk):
-	return HttpResponse('Event!')
+	event = models.Event.objects.get(pk=pk)
+	return render(request, 'main/event.htm', {'event': event})
 
 # News.
 def news(request):
 	news = models.New.objects.order_by('-updated_at')
 	return render(request, 'main/news.htm', {'news': news})
+
+# Events.
+def events(request):
+	events = models.Event.objects.order_by('-updated_at')
+	return render(request, 'main/events.htm', {'events': events})

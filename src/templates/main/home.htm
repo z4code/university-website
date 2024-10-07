@@ -25,7 +25,7 @@
                 </div>
             {% endfor %}
         </div>
-        <a href="#" class="btn btn-outline-primary my-3 float-end">
+        <a href="{% url 'news' %}" class="btn btn-outline-primary my-3 float-end">
             View all news
             <i class="bi bi-chevron-right"></i>
         </a>
@@ -47,13 +47,13 @@
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
                             <small class="text-body-secondary">{{ event.event_type }}</small>
-                            <a href="" class="btn btn-sm btn-primary">View</a>
+                            <a href="{% url 'event' event.pk %}" class="btn btn-sm btn-primary">View</a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <a href="#" class="btn btn-outline-primary my-3 float-end">
+        <a href="{% url 'events' %}" class="btn btn-outline-primary my-3 float-end">
             View all events
             <i class="bi bi-chevron-right"></i>
         </a>

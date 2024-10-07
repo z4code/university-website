@@ -1,0 +1,17 @@
+{% extends 'base.htm' %}
+
+{% block title %}Event{% endblock %}
+{% load mark %}
+
+{% block content %}
+	<!-- News details. -->
+	{% if event %}
+		<h6 class="card-subtitle mb-2">{{ event.location }} | {{ event.start_date|date:"M d, Y" }} - {{ event.end_date|date:"M d, Y" }}</h6>
+		<h1>{{ event.title }}</h1>
+		<div class="row">
+			<div class="">
+				{{ event.description|markdownify|safe }}
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

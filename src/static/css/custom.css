@@ -4,3 +4,10 @@
 * {
 	font-family: "Fredoka", sans-serif;
 }
+
+.navbar .navbar-toggler,
+.navbar .navbar-toggler:focus,
+.navbar .offcanvas .btn-close:focus {
+	border: none;
+	box-shadow: none;
+}
