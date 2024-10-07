@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
 	path('', views.home, name='home'),
 	path('new/<int:pk>/', views.new, name='new'),
+	path('news/', views.news, name='news'),
 
 	# USER AUTH.
 	path('login/', views.login_user, name='login'),

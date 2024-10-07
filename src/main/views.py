@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import RegisterForm
 from . import models
+from django.http import HttpResponse
 
 # Home.
 def home(request):
@@ -61,3 +62,12 @@ def register_user(request):
 		# If the form comes up empty.
 		form = RegisterForm()
 	return render(request, 'main/register.htm', {'form': form})
+
+# Event.
+def event(request, pk):
+	return HttpResponse('Event!')
+
+# News.
+def news(request):
+	news = models.New.objects.order_by('-updated_at')
+	return render(request, 'main/news.htm', {'news': news})

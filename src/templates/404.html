@@ -1,0 +1,12 @@
+<!-- home.html -->
+{% extends 'base.htm' %}
+
+{% block title %}404{% endblock %}
+
+{% block content %}
+    <div class="col-md-8 offset-md-2 text-center">
+        <h1 class="fw-bold display-3">404 Not Found</h1>
+        <p class="lead">Sorry, the page you're looking for doesn't exist.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Go back to Home</a>
+    </div>
+{% endblock %}
