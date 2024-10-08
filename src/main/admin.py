@@ -8,6 +8,7 @@ admin.site.register(models.Category)
 admin.site.register(models.New)
 admin.site.register(models.Event)
 admin.site.register(models.Banner)
+admin.site.register(models.VirtualReception)
 
 # Unregister.
 admin.site.unregister(Group)

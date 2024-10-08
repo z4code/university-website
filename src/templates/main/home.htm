@@ -3,27 +3,27 @@
 {% load static %}
 {% load mark %}
 {% block content %}
+    <!-- Banners. -->
+    <div class="banner-section">
+        {% for banner in banners %}
+            {% if banner %}
+                <div class="banner">
+                    <img src="{{ banner.image.url }}" class="img-fluid" alt="{{ banner.title }}">
+                    <div class="banner-info">
+                        <h2>{{ banner.title }}</h2>
+                        <p>{{ banner.description }}</p>
+                        {% if banner.URL %}
+                            <a href="{{ banner.URL }}" target="_blank" class="btn btn-primary">Learn More</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- Large space. -->
+    <div class="my-5 py-5"></div>
     <!-- Release of the last 3 news. -->
     {% if news %}
-        <!-- Banners. -->
-        <div class="banner-section">
-            {% for banner in banners %}
-                {% if banner %}
-                    <div class="banner">
-                        <img src="{{ banner.image.url }}" class="img-fluid" alt="{{ banner.title }}">
-                        <div class="banner-info">
-                            <h2>{{ banner.title }}</h2>
-                            <p>{{ banner.description }}</p>
-                            {% if banner.URL %}
-                                <a href="{{ banner.URL }}" target="_blank" class="btn btn-primary">Learn More</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <!-- Large space. -->
-        <div class="my-5 py-5"></div>
         <h1>Latest News</h1>
         <p>Updates from across the University</p>
         <!-- Create cards. -->

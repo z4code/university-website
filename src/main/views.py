@@ -7,8 +7,13 @@ from django.http import HttpResponse
 
 # Home.
 def home(request):
+	# Sent the last 3 news.
 	news = models.New.objects.order_by('-updated_at')[:3]
+
+	# Sent the last 3 events.
 	events = models.Event.objects.order_by('-updated_at')[:3]
+
+	# Send all active banners.
 	banners = models.Banner.objects.filter(is_active=True).order_by('-created_at')
 	return render(request, 'main/home.htm', {'news': news, 'events': events, 'banners': banners})
 
@@ -71,10 +76,12 @@ def event(request, pk):
 
 # News.
 def news(request):
+	# Sent all news.
 	news = models.New.objects.order_by('-updated_at')
 	return render(request, 'main/news.htm', {'news': news})
 
 # Events.
 def events(request):
+	# Sent all events.
 	events = models.Event.objects.order_by('-updated_at')
 	return render(request, 'main/events.htm', {'events': events})

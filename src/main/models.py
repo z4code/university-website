@@ -101,3 +101,39 @@ class Banner(models.Model):
 		verbose_name = _('Banner')
 		verbose_name_plural = _('Banners')
 		ordering = ['-created_at']
+
+# Virtual Reception.
+class VirtualReception(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('responded', 'Responded'),
+        ('resolved', 'Resolved'),
+    ]
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    department = models.CharField(max_length=100, blank=True, null=True)
+    inquiry = models.TextField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    response = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    responded_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Inquiry from {self.name} - {self.status}"
+
+    def mark_as_responded(self, response):
+        self.status = 'responded'
+        self.response = response
+        self.responded_at = timezone.now()
+        self.save()
+
+    def mark_as_resolved(self):
+        self.status = 'resolved'
+        self.save()
+
+    class Meta:
+        verbose_name_plural = "Virtual Receptions"
+        ordering = ['-created_at']
+
