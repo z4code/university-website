@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 # Tag.
 class Tag(models.Model):
@@ -12,7 +14,7 @@ class Tag(models.Model):
 			self.slug = slugify(self.name.lower())
 		super().save(*args, **kwargs)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.name
 
 # Category.
@@ -29,7 +31,7 @@ class Category(models.Model):
 			self.slug = slugify(self.name.lower())
 		super().save(*args, **kwargs)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.name
 
 # New.
@@ -49,7 +51,7 @@ class New(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.title
 
 # Event.
@@ -73,9 +75,29 @@ class Event(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.title
 
 	class Meta:
 		ordering = ['start_date']
 		verbose_name_plural = 'Events'
+
+# Banner.
+class Banner(models.Model):
+	title = models.CharField(max_length=255)
+	description = models.TextField(blank=True, null=True)
+	image = models.ImageField(upload_to='uploads/banners', blank=True, null=True)
+	URL = models.URLField(blank=True, null=True, help_text=_('Optional URL for the banner to link to.'))
+	is_active = models.BooleanField(default=False)
+	start_date = models.DateTimeField(blank=True, null=True, help_text=_('Optional. Set when the banner should start showing.'))
+	end_date = models.DateTimeField(blank=True, null=True, help_text=_('Optional. Set when the banner should stop showing.'))
+	created_at = models.DateTimeField(default=timezone.now)
+	updated_at = models.DateTimeField(auto_now=True)
+
+	def __str__(self) -> str:
+		return self.title
+
+	class Meta:
+		verbose_name = _('Banner')
+		verbose_name_plural = _('Banners')
+		ordering = ['-created_at']

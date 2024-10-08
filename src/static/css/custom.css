@@ -5,9 +5,34 @@
 	font-family: "Fredoka", sans-serif;
 }
 
+:root {
+    --main-bg: #edeff1;
+    --header-bg: #001F3F;
+    --navbar-bg: #2C3E50;
+    --section-bg: #FFFFFF;
+    --footer-bg: #343A40;
+    --accent-bg: #FFC72C;
+	--white: #fff;
+}
+
+
+body {
+	background: var(--main-bg);
+}
+
 .navbar .navbar-toggler,
 .navbar .navbar-toggler:focus,
 .navbar .offcanvas .btn-close:focus {
 	border: none;
 	box-shadow: none;
+}
+
+.carousel-caption {
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(25px);
+	border-radius: 5px;
+}
+
+.carousel-caption h5, .carousel-caption p {
+	color: var(--white);
 }

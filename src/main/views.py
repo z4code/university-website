@@ -9,7 +9,8 @@ from django.http import HttpResponse
 def home(request):
 	news = models.New.objects.order_by('-updated_at')[:3]
 	events = models.Event.objects.order_by('-updated_at')[:3]
-	return render(request, 'main/home.htm', {'news': news, 'events': events})
+	banners = models.Banner.objects.filter(is_active=True).order_by('-created_at')
+	return render(request, 'main/home.htm', {'news': news, 'events': events, 'banners': banners})
 
 # New.
 def new(request, pk):

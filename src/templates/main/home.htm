@@ -1,9 +1,29 @@
 {% extends 'base.htm' %}
 {% block title %}Home{% endblock %}
+{% load static %}
 {% load mark %}
 {% block content %}
     <!-- Release of the last 3 news. -->
     {% if news %}
+        <!-- Banners. -->
+        <div class="banner-section">
+            {% for banner in banners %}
+                {% if banner %}
+                    <div class="banner">
+                        <img src="{{ banner.image.url }}" class="img-fluid" alt="{{ banner.title }}">
+                        <div class="banner-info">
+                            <h2>{{ banner.title }}</h2>
+                            <p>{{ banner.description }}</p>
+                            {% if banner.URL %}
+                                <a href="{{ banner.URL }}" target="_blank" class="btn btn-primary">Learn More</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Large space. -->
+        <div class="my-5 py-5"></div>
         <h1>Latest News</h1>
         <p>Updates from across the University</p>
         <!-- Create cards. -->
@@ -12,7 +32,7 @@
                 <div class="col">
                     <div class="card h-100">
                         <img src="{{ new.image.url }}" class="card-img-top" alt="{{ new.location }}">
-                        <div class="card-body">
+                        <div class="card-body shadow">
                             <h5 class="card-title">{{ new.title }}</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ new.location }} - {{ new.created_at|date:"M d, Y" }}</h6>
                             <p class="card-text">{{ new.content|truncatewords:20|markdownify|safe }}</p>
@@ -30,6 +50,7 @@
             <i class="bi bi-chevron-right"></i>
         </a>
     {% endif %}
+    <!-- Large space. -->
     <div class="my-5 py-5"></div>
     <!-- Release of the last 3 events. -->
     {% if events %}
@@ -39,7 +60,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {% for event in events %}
                 <div class="col">
-                    <div class="card h-100">
+                    <div class="card h-100 shadow">
                         <div class="card-body">
                             <h5 class="card-title">{{ event.title }}</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ event.location }} - {{ event.created_at|date:"M d, Y" }}</h6>

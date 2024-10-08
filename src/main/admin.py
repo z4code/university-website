@@ -7,6 +7,7 @@ admin.site.register(models.Tag)
 admin.site.register(models.Category)
 admin.site.register(models.New)
 admin.site.register(models.Event)
+admin.site.register(models.Banner)
 
 # Unregister.
 admin.site.unregister(Group)
